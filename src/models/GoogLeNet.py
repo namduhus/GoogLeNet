@@ -6,6 +6,8 @@ from .module.Inception import Inception # Inception 모듈가져오기
 ############################################################
 
 # Auxiliary Classifier 
+# 네트워크의 중간중간에 Classifier를 추가하여 학습 Loss를 흐르게 만들어주는 방법입니다. 
+# 마치 긴 터널의 중간중간에 환기구를 뚫어 공기 흐름을 원활하게 해 주는 것과 같은 이치라고 할 수 있습니다.
 class AuxiliaryClassifier(nn.Module):
     def __init__(self, in_channels, num_classes):
         super(AuxiliaryClassifier, self).__init__()
