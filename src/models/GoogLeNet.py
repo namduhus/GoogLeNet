@@ -2,7 +2,7 @@
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
-from .module.Inception import Inception # Inception 모듈가져오기
+from .module import Inception  # 절대 경로로 Inception 불러오기
 ############################################################
 
 # Auxiliary Classifier 
@@ -18,7 +18,7 @@ class AuxiliaryClassifier(nn.Module):
         # 1x1 conv으로 채널 수를 줄임
         self.conv = nn.Conv2d(in_channels, 128, kernel_size=1)
         
-        #FC layer 
+        # Fully Connected layer 
         self.fc1 = nn.Linear(128 * 4 * 4, 1024) # 특성 크기에 맞춰 크기를 조정
         self.fc2 = nn.Linear(1024, num_classes)
         
@@ -37,12 +37,8 @@ class GoogLeNet(nn.Module):
     def __init__(self, num_classes=1000):
         super(GoogLeNet, self).__init__()
         
-        
-        #초기 합성곱 계층
-        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride= 2, padding=3)
-        self.maxpool1 = nn.MaxPool2d(3, stride=2, padding=1)
-        
-        self.conv2 = nn.MaxPool2d(3, stride=2, padding=1)
+        # 초기 합성곱 계층
+        self.conv1 = nn.Conv2d(3, 64, kernel_size=7, stride=2, padding=3)
         self.maxpool1 = nn.MaxPool2d(3, stride=2, padding=1)
         
         self.conv2 = nn.Conv2d(64, 64, kernel_size=1)
@@ -112,4 +108,4 @@ class GoogLeNet(nn.Module):
         x = self.fc(x)
         
         # 학습 시, 메인 출력과 보조 분류기 출력을 반환
-        return x, aux1, aux2 if self.training else x
+        return (x, aux1, aux2) if self.training else x

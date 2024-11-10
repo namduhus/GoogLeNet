@@ -3,9 +3,9 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 # Inception 모듈 정의
-class Inception(nn.Module): # in_channels는 Inception 모듈의 입력 채널수를 의미
-    def __init__(self, in_channels, ch1x1, ch3x3_reduce, ch3x3, ch5x5_redue, ch5x5, pool_proj):
-        super(Inception).__init__()
+class Inception(nn.Module):  # in_channels는 Inception 모듈의 입력 채널수를 의미
+    def __init__(self, in_channels, ch1x1, ch3x3_reduce, ch3x3, ch5x5_reduce, ch5x5, pool_proj):
+        super(Inception, self).__init__()
         
         # 1x1 conv layer
         self.layer1 = nn.Conv2d(in_channels, ch1x1, kernel_size=1)
@@ -18,8 +18,8 @@ class Inception(nn.Module): # in_channels는 Inception 모듈의 입력 채널�
         
         # 1x1 -> 5x5 conv layer
         self.layer3 = nn.Sequential(
-            nn.Conv2d(in_channels, ch5x5_redue, kernel_size=1),
-            nn.Conv2d(ch5x5_redue, ch5x5, kernel_size=5, padding=2)
+            nn.Conv2d(in_channels, ch5x5_reduce, kernel_size=1),
+            nn.Conv2d(ch5x5_reduce, ch5x5, kernel_size=5, padding=2)
         )
         
         # 3x3 maxpooling -> 1x1 layer
@@ -36,5 +36,4 @@ class Inception(nn.Module): # in_channels는 Inception 모듈의 입력 채널�
         
         # outputs을 지정해 4개의 레이어를 합쳐서 결과 반환
         outputs = [layer1, layer2, layer3, layer4]
-        return torch.cat(outputs, 1)
-        # torch.cat을 사용해 4개의 레이어에서 나온값을 1차원으로 연결
+        return torch.cat(outputs, 1)  # torch.cat을 사용해 4개의 레이어에서 나온 값을 1차원으로 연결
