@@ -55,4 +55,7 @@ DNN의 성능을 높이는 가장 단순하면서 정확한 방법은 depth, the
 ## GoogLeNet
 ![image](https://github.com/user-attachments/assets/dd3e00a2-b191-49d2-84f5-0bbecbc38cc3)
 
+## Summary
+
+<img width="352" alt="image" src="https://github.com/user-attachments/assets/d2687573-73bd-4484-9bdb-7bfeda7e1722">
 
