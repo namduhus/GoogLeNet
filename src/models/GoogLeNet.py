@@ -34,7 +34,7 @@ class AuxiliaryClassifier(nn.Module):
       
 # GoogLeNet 모델 정의
 class GoogLeNet(nn.Module):
-    def __init__(self, num_classes=1000):
+    def __init__(self, num_classes=10):
         super(GoogLeNet, self).__init__()
         
         # 초기 합성곱 계층
